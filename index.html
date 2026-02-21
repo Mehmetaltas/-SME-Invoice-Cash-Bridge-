@@ -1,129 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>SME Invoice Cash Bridge</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SME Invoice Cash Bridge + RiskLens</title>
+
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --card:#ffffff;
+    --text:#1d232b;
+    --muted:#6b7785;
+    --primary:#0b5ed7;
+    --primary2:#094db3;
+    --good:#14804a;
+    --warn:#b35c00;
+    --bad:#b42318;
+    --line:#e7edf3;
+    --chip:#eef4ff;
+  }
+
+  body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+  }
+
+  header{
+    background:var(--primary);
+    color:white;
+    padding:34px 18px;
+    text-align:center;
+  }
+
+  .topbar{
+    max-width:980px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+
+  .brand{
+    font-weight:700;
+    letter-spacing:.2px;
+  }
+
+  .lang button{
+    padding:10px 14px;
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    margin-left:6px;
+  }
+  .lang button:hover{ background:rgba(255,255,255,.22); }
+
+  .container{
+    padding:22px 14px 44px;
+    max-width:980px;
+    margin:auto;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:14px;
+  }
+
+  @media(min-width: 920px){
+    .grid{ grid-template-columns: 1.1fr .9fr; }
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:18px;
+    border-radius:14px;
+    box-shadow:0 2px 8px rgba(10,20,30,0.06);
+  }
+
+  h1{ margin:14px 0 8px; font-size:26px; }
+  h2{ margin:0 0 10px; font-size:18px; }
+  p{ margin:10px 0; line-height:1.45; color:var(--text); }
+  .muted{ color:var(--muted); }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  button.primary{
+    padding:12px 16px;
+    border:none;
+    background:var(--primary);
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  button.primary:hover{ background:var(--primary2); }
+
+  button.ghost{
+    padding:12px 16px;
+    border:1px solid var(--line);
+    background:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+  }
+
+  .hidden{ display:none; }
+
+  .chip{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:var(--chip);
+    border:1px solid #d7e6ff;
+    color:#0b3b8a;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .kpi{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+  }
+  .kpi .box{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px;
+    background:#fbfdff;
+  }
+  .kpi .label{ font-size:12px; color:var(--muted); }
+  .kpi .value{ font-size:16px; font-weight:800; margin-top:6px; }
+
+  .score{
+    font-size:28px;
+    font-weight:900;
+    margin:0;
+  }
+
+  .bar{
+    height:10px;
+    background:#eaf0f7;
+    border-radius:999px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .fill{
+    height:100%;
+    width:0%;
+    border-radius:999px;
+    background:var(--good);
+    transition: width .4s ease;
+  }
+
+  .flag{
+    border:1px solid var(--line);
+    border-left:6px solid #999;
+    border-radius:12px;
+    padding:12px;
+    background:white;
+    margin-top:10px;
+  }
+  .flag.good{ border-left-color: var(--good); }
+  .flag.warn{ border-left-color: var(--warn); }
+  .flag.bad{ border-left-color: var(--bad); }
+
+  .flag b{ display:block; margin-bottom:6px; }
+  .small{ font-size:13px; color:var(--muted); }
+
+  .footer{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .divider{
+    height:1px;
+    background:var(--line);
+    margin:14px 0;
+  }
+</style>
 </head>
-<body>
-  <header>
-    <h1>Welcome to SME Invoice Cash Bridge</h1>
-    <p>Your partner for unlocking the full potential of your business.</p>
-  </header>
-  
-  <section>
-    <h2>How It Works</h2>
-    <p>We help SMEs access working capital through invoice financing and bridge financing options.</p>
-  </section>
-  
-  <footer>
-    <p>&copy; 2026 SME Invoice Cash Bridge. All rights reserved.</p>
-  </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SME Invoice Cash Bridge</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #0b1020;
-      color: white;
-    }
 
-    .header {
-      background-color: #111633;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .container {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .slider {
-      margin: 20px auto;
-      width: 80%;
-      height: 200px;
-      background-color: #333;
-    }
-
-    .slider img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .contact-form {
-      margin-top: 20px;
-      background-color: #222;
-      padding: 20px;
-      text-align: left;
-      max-width: 500px;
-      margin: 20px auto;
-      border-radius: 8px;
-    }
-
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #fff;
-      border-radius: 4px;
-      background-color: #333;
-      color: white;
-    }
-
-    .footer {
-      background-color: #111633;
-      padding: 10px;
-      text-align: center;
-      color: white;
-    }
-  </style>
-</head>
 <body>
 
-  <!-- Header -->
-  <div class="header">
-    Welcome to SME Invoice Cash Bridge
+<header>
+  <div class="topbar">
+    <div class="brand">SME Invoice Cash Bridge + RiskLens</div>
+    <div class="lang">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('tr')">TR</button>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="container">
-    <h1>How It Works</h1>
-    <p>We help SMEs access working capital through invoice financing and bridge financing options.</p>
-    
-    <!-- Slider -->
-    <div class="slider">
-      <img src="https://via.placeholder.com/800x200" alt="Slider Image">
+  <h1 id="title">Unlock Working Capital — With Real Risk Intelligence</h1>
+  <p id="subtitle" class="muted" style="color:rgba(255,255,255,.9); max-width:900px; margin:10px auto 0;">
+    A secure, AI-powered invoice financing platform that detects fraud, reduces losses, and accelerates SME cash flow.
+  </p>
+</header>
+
+<div class="container">
+
+  <div class="grid">
+
+    <!-- LEFT: Product story + demo -->
+    <div class="card">
+      <span class="chip" id="chip1">Unified Product</span>
+
+      <h2 id="problemTitle">Problem</h2>
+      <p id="problemText">
+        SMEs suffer from delayed invoice payments and cash flow gaps. Traditional financing is slow and risk-heavy.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 id="solutionTitle">Solution</h2>
+      <p id="solutionText">
+        We combine two layers: <b>Cash Bridge</b> (funding execution) + <b>RiskLens</b> (risk & fraud intelligence).
+        This makes invoice financing faster and safer for lenders/investors.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 id="demoTitle">Demo Simulation</h2>
+      <p class="small" id="demoHint">
+        Click to simulate a funding request and instant RiskLens screening.
+      </p>
+
+      <div class="row">
+        <button class="primary" onclick="runDemo('low')"
+          id="btnLow">Demo: Low Risk Invoice</button>
+        <button class="ghost" onclick="runDemo('high')"
+          id="btnHigh">Demo: High Risk / Fraud Signals</button>
+      </div>
+
+      <div id="fundingResult" class="hidden" style="margin-top:14px;">
+        <div class="kpi">
+          <div class="box">
+            <div class="label" id="kpi1Label">Invoice Amount</div>
+            <div class="value" id="kpi1Value">€50,000</div>
+          </div>
+          <div class="box">
+            <div class="label" id="kpi2Label">Funding Offer</div>
+            <div class="value" id="kpi2Value">€47,500</div>
+          </div>
+          <div class="box">
+            <div class="label" id="kpi3Label">Tenor</div>
+            <div class="value" id="kpi3Value">45 days</div>
+          </div>
+          <div class="box">
+            <div class="label" id="kpi4Label">Status</div>
+            <div class="value" id="kpi4Value">Available</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 id="nextTitle">Next Step</h2>
+        <p id="nextText">
+          If RiskLens passes, Cash Bridge routes the invoice to banks/funds/investors with pricing based on risk.
+        </p>
+      </div>
+
+      <div class="footer" id="footerText">
+        Demo only — data is simulated for presentation.
+      </div>
     </div>
 
-    <!-- Contact Form -->
-    <div class="contact-form">
-      <h3>Contact Us</h3>
-      <form action="#">
-        <input type="text" placeholder="Your Name" required><br>
-        <input type="email" placeholder="Your Email" required><br>
-        <textarea placeholder="Your Message" rows="4" required></textarea><br>
-        <input type="submit" value="Send Message">
-      </form>
+    <!-- RIGHT: RiskLens panel -->
+    <div class="card">
+      <span class="chip" id="chip2">RiskLens</span>
+      <h2 id="riskTitle">Risk & Fraud Intelligence</h2>
+      <p id="riskText">
+        RiskLens screens invoices and counterparties to reduce fraud, fake invoices, circular trading, and AML exposure.
+      </p>
+
+      <div class="divider"></div>
+
+      <div id="riskPanel" class="hidden">
+        <p class="score" id="riskScore">82</p>
+        <p class="muted" id="riskLabel">Risk Score (0–100, higher = safer)</p>
+
+        <div class="bar"><div class="fill" id="riskFill"></div></div>
+
+        <div class="kpi" style="margin-top:12px;">
+          <div class="box">
+            <div class="label" id="rk1Label">Fraud Signals</div>
+            <div class="value" id="rk1Value">Low</div>
+          </div>
+          <div class="box">
+            <div class="label" id="rk2Label">AML Flag</div>
+            <div class="value" id="rk2Value">Clear</div>
+          </div>
+          <div class="box">
+            <div class="label" id="rk3Label">Buyer Reliability</div>
+            <div class="value" id="rk3Value">Strong</div>
+          </div>
+          <div class="box">
+            <div class="label" id="rk4Label">Invoice Integrity</div>
+            <div class="value" id="rk4Value">Verified</div>
+          </div>
+        </div>
+
+        <div id="flagsArea" style="margin-top:10px;"></div>
+
+        <div class="divider"></div>
+
+        <h2 id="controlsTitle">Controls</h2>
+        <p class="small" id="controlsText">
+          Add mandatory checks (e-invoice verification, KYC/KYB, bank statement, delivery proof) based on risk level.
+        </p>
+      </div>
+
+      <div id="riskEmpty" class="muted">
+        <p id="riskEmptyText">Run a demo on the left to see RiskLens results here.</p>
+      </div>
+
     </div>
+
   </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    <p>&copy; 2026 SME Invoice Cash Bridge. All rights reserved.</p>
-  </div>
+</div>
+
+<script>
+let LANG = "en";
+
+function setLang(lang){
+  LANG = lang;
+
+  const copy = {
+    en:{
+      title:"Unlock Working Capital — With Real Risk Intelligence",
+      subtitle:"A secure, AI-powered invoice financing platform that detects fraud, reduces losses, and accelerates SME cash flow.",
+      chip1:"Unified Product",
+      problemTitle:"Problem",
+      problemText:"SMEs suffer from delayed invoice payments and cash flow gaps. Traditional financing is slow and risk-heavy.",
+      solutionTitle:"Solution",
+      solutionText:"We combine two layers: Cash Bridge (funding execution) + RiskLens (risk & fraud intelligence). This makes invoice financing faster and safer for lenders/investors.",
+      demoTitle:"Demo Simulation",
+      demoHint:"Click to simulate a funding request and instant RiskLens screening.",
+      btnLow:"Demo: Low Risk Invoice",
+      btnHigh:"Demo: High Risk / Fraud Signals",
+      kpi1Label:"Invoice Amount",
+      kpi2Label:"Funding Offer",
+      kpi3Label:"Tenor",
+      kpi4Label:"Status",
+      nextTitle:"Next Step",
+      nextText:"If RiskLens passes, Cash Bridge routes the invoice to banks/funds/investors with pricing based on risk.",
+      footerText:"Demo only — data is simulated for presentation.",
+      chip2:"RiskLens",
+      riskTitle:"Risk & Fraud Intelligence",
+      riskText:"RiskLens screens invoices and counterparties to reduce fraud, fake invoices, circular trading, and AML exposure.",
+      riskLabel:"Risk Score (0–100, higher = safer)",
+      rk1Label:"Fraud Signals",
+      rk2Label:"AML Flag",
+      rk3Label:"Buyer Reliability",
+      rk4Label:"Invoice Integrity",
+      riskEmptyText:"Run a demo on the left to see RiskLens results here.",
+      controlsTitle:"Controls",
+      controlsText:"Add mandatory checks (e-invoice verification, KYC/KYB, bank statement, delivery proof) based on risk level."
+    },
+    tr:{
+      title:"Anında Nakit — Gerçek Risk İstihbaratı ile",
+      subtitle:"Fraud tespit eden, kaybı azaltan ve KOBİ nakit akışını hızlandıran güvenli, AI destekli fatura finansmanı platformu.",
+      chip1:"Tek Ürün",
+      problemTitle:"Problem",
+      problemText:"KOBİ’ler geciken faturalar ve nakit akışı boşlukları nedeniyle sıkışır. Klasik finansman yavaş ve risklidir.",
+      solutionTitle:"Çözüm",
+      solutionText:"İki katmanı birleştiriyoruz: Cash Bridge (finansmanı yürütür) + RiskLens (risk ve fraud istihbaratı). Böylece fatura finansmanı daha hızlı ve daha güvenli olur.",
+      demoTitle:"Demo Simülasyonu",
+      demoHint:"Soldan demo seçip fonlama talebini ve RiskLens taramasını simüle et.",
+      btnLow:"Demo: Düşük Risk Fatura",
+      btnHigh:"Demo: Yüksek Risk / Fraud Sinyali",
+      kpi1Label:"Fatura Tutarı",
+      kpi2Label:"Fonlama Teklifi",
+      kpi3Label:"Vade",
+      kpi4Label:"Durum",
+      nextTitle:"Sonraki Adım",
+      nextText:"RiskLens geçerse, Cash Bridge faturayı bankalara/fonlara/yatırımcılara risk bazlı fiyatlama ile yönlendirir.",
+      footerText:"Sadece demo — veriler sunum için simüle edilmiştir.",
+      chip2:"RiskLens",
+      riskTitle:"Risk & Fraud İstihbaratı",
+      riskText:"RiskLens; sahte/naylon fatura, hatır çeki benzeri suistimal, döngüsel ticaret ve AML riskini azaltmak için tarama yapar.",
+      riskLabel:"Risk Skoru (0–100, yüksek = daha güvenli)",
+      rk1Label:"Fraud Sinyali",
+      rk2Label:"AML Bayrağı",
+      rk3Label:"Alıcı Güvenilirliği",
+      rk4Label:"Fatura Bütünlüğü",
+      riskEmptyText:"Soldan bir demo çalıştır; RiskLens sonucu burada görünecek.",
+      controlsTitle:"Kontroller",
+      controlsText:"Risk seviyesine göre zorunlu kontroller eklenir (e-fatura doğrulama, KYC/KYB, banka ekstresi, teslimat kanıtı)."
+    }
+  };
+
+  const c = copy[lang];
+  for(const id of Object.keys(c)){
+    const el = document.getElementById(id);
+    if(el) el.innerText = c[id];
+  }
+}
+
+function runDemo(mode){
+  document.getElementById("fundingResult").classList.remove("hidden");
+  document.getElementById("riskPanel").classList.remove("hidden");
+  document.getElementById("riskEmpty").classList.add("hidden");
+
+  // base values
+  let invoiceAmount = 50000;
+  let tenor = 45;
+
+  // risk output
+  let score, fraud, aml, buyer, integrity, status, offerPct, flags;
+
+  if(mode === "low"){
+    score = 82;
+    fraud = (LANG==="tr") ? "Düşük" : "Low";
+    aml = (LANG==="tr") ? "Temiz" : "Clear";
+    buyer = (LANG==="tr") ? "Güçlü" : "Strong";
+    integrity = (LANG==="tr") ? "Doğrulandı" : "Verified";
+    status = (LANG==="tr") ? "Uygun" : "Available";
+    offerPct = 0.95; // 95%
+    flags = [
+      {type:"good", title:(LANG==="tr")?"E-Fatura doğrulama":"E-invoice verification", text:(LANG==="tr")?"Fatura kayıtlarıyla eşleşti.":"Matched with invoice registry."},
+      {type:"good", title:(LANG==="tr")?"Alıcı ödeme geçmişi":"Buyer payment history", text:(LANG==="tr")?"Düzenli ödeme paterni.":"Consistent payment behavior."},
+      {type:"good", title:(LANG==="tr")?"Teslimat kanıtı":"Delivery proof", text:(LANG==="tr")?"Belgeler tutarlı.":"Documents consistent."}
+    ];
+  }else{
+    score = 34;
+    fraud = (LANG==="tr") ? "Yüksek" : "High";
+    aml = (LANG==="tr") ? "İnceleme" : "Review";
+    buyer = (LANG==="tr") ? "Zayıf" : "Weak";
+    integrity = (LANG==="tr") ? "Şüpheli" : "Suspicious";
+    status = (LANG==="tr") ? "Beklet / İnceleme" : "Hold / Review";
+    offerPct = 0.80; // 80% or blocked depending on policy
+
+    flags = [
+      {type:"bad", title:(LANG==="tr")?"Sahte/naylon fatura sinyali":"Fake invoice signal", text:(LANG==="tr")?"Sektör ortalamasına göre sıra dışı tutar ve tekrar paterni.":"Unusual amount and repetition vs. sector baseline."},
+      {type:"warn", title:(LANG==="tr")?"Döngüsel ticaret ihtimali":"Circular trading suspicion", text:(LANG==="tr")?"Aynı karşı taraflar arasında sık tekrar.":"High recurrence between same counterparties."},
+      {type:"warn", title:(LANG==="tr")?"KYC/KYB eksik":"KYC/KYB missing", text:(LANG==="tr")?"Faydalanıcı sahiplik ve şirket evrakları tamam değil.":"Beneficial ownership / company docs incomplete."},
+      {type:"warn", title:(LANG==="tr")?"Banka hareketi tutarsızlığı":"Bank movement mismatch", text:(LANG==="tr")?"İş hacmi ile hesap akışı uyumsuz.":"Cashflow does not match stated volume."}
+    ];
+  }
+
+  // render funding
+  const offer = Math.round(invoiceAmount * offerPct);
+
+  document.getElementById("kpi1Value").innerText = "€" + invoiceAmount.toLocaleString("en-US");
+  document.getElementById("kpi2Value").innerText = "€" + offer.toLocaleString("en-US");
+  document.getElementById("kpi3Value").innerText = tenor + ((LANG==="tr") ? " gün" : " days");
+  document.getElementById("kpi4Value").innerText = status;
+
+  // render risk
+  document.getElementById("riskScore").innerText = score;
+  document.getElementById("rk1Value").innerText = fraud;
+  document.getElementById("rk2Value").innerText = aml;
+  document.getElementById("rk3Value").innerText = buyer;
+  document.getElementById("rk4Value").innerText = integrity;
+
+  const fill = document.getElementById("riskFill");
+  fill.style.width = score + "%";
+  if(score >= 70) fill.style.background = getComputedStyle(document.documentElement).getPropertyValue('--good');
+  else if(score >= 45) fill.style.background = getComputedStyle(document.documentElement).getPropertyValue('--warn');
+  else fill.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bad');
+
+  // flags
+  const flagsArea = document.getElementById("flagsArea");
+  flagsArea.innerHTML = "";
+  flags.forEach(f=>{
+    const div = document.createElement("div");
+    div.className = "flag " + f.type;
+    div.innerHTML = "<b>"+escapeHtml(f.title)+"</b><div class='small'>"+escapeHtml(f.text)+"</div>";
+    flagsArea.appendChild(div);
+  });
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+// init
+setLang("en");
+</script>
 
 </body>
 </html>
